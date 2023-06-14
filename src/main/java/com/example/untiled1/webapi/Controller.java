@@ -1,16 +1,13 @@
 package com.example.untiled1.webapi;
 
-import com.example.untiled1.request.TutorialRq;
+import com.example.untiled1.response.PhongBanRp;
+import com.example.untiled1.response.TaiKhoanRp;
 import com.example.untiled1.response.TutorialRp;
+import com.example.untiled1.service.PhongBanService;
 import com.example.untiled1.service.TutorialService;
-import com.fasterxml.jackson.databind.JsonNode;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +17,7 @@ public class Controller {
 
     @Autowired
     private TutorialService tutorialService;
+
 
     @GetMapping("/search")
     public ResponseEntity<List<TutorialRp>> search() throws SQLException {
