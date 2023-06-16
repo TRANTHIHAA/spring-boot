@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class TaiKhoanController {
 
-    @Autowired
-    private TutorialService tutorialService;
 
     @Autowired
     private PhongBanService phongBanService;
@@ -31,12 +30,11 @@ public class TaiKhoanController {
     public ResponseEntity<List<TaiKhoanRp>> search() throws SQLException {
         return ResponseEntity.ok(taiKhoanService.searchAll());
     }
-    @GetMapping("/dmdc-taiKhoan/search")
+    @GetMapping("/dmdc-phong-ban/search")
     public ResponseEntity<List<PhongBanRp>> searchTaiKhoan() throws SQLException {
         return ResponseEntity.ok(phongBanService.searchAll());
     }
-
-    @PostMapping("/tao-moi")
+    @PostMapping(value ="/tao-moi",consumes = { "application/json;charset=UTF-8" })
     public ResponseEntity<TaiKhoanRp> createUser( @RequestBody TaiKhoanRp taiKhoanRp) throws SQLException {
         return ResponseEntity.ok(taiKhoanService.createUser(taiKhoanRp));
     }
