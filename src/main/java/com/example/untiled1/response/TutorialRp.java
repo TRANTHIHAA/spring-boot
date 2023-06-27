@@ -3,11 +3,15 @@ package com.example.untiled1.response;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class TutorialRp {
-    private Long id;
+    private BigDecimal id;
     private String description;
     private String title;
     private String status;
+    private String status1;
+
 }

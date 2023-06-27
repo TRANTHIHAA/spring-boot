@@ -3,14 +3,17 @@ package com.example.untiled1.response;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 @Getter
 @Setter
 public class PhongBanRp {
-    private Long id;
-    private Long trangThai;
+    private BigDecimal id;
+    private BigDecimal trangThai;
     private String tenPhongBan;
-    private String ngayTao;
+    private Date ngayTao;
     private String nguoiTao;
-    private String ngaySua;
+    private Date ngaySua;
     private String nguoiSua;
 }

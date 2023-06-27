@@ -2,18 +2,14 @@ package com.example.untiled1.service;
 
 
 import com.example.untiled1.repository.impl.TutorialDTORepository;
-import com.example.untiled1.request.TutorialRq;
 import com.example.untiled1.response.TutorialRp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @Slf4j
 @Service
@@ -23,92 +19,58 @@ public class TutorialService {
     TutorialDTORepository repository;
 
     public List<TutorialRp> searchAll() throws SQLException {
-        ResultSet rs = repository.getAll1();
-        if (rs == null) {
-            throw new RuntimeException("ko có dl");
-        }
-        List<TutorialRp> records=new ArrayList<TutorialRp>();
-        int i=1;
-        while(rs.next()){
-            TutorialRp arr = new TutorialRp();
-//             arr = rs.getObject(i,TutorialRp.class);
-            arr.setId(rs.getLong("ID"));
-            arr.setDescription(rs.getString("DESCRIPTION"));
-            arr.setTitle(rs.getString("TITLE"));
-            arr.setStatus(rs.getString("STATUS"));
-            records.add(arr);
-            i++;
-        }
-        return records;
+        return repository.getAll1();
     }
+
+// cách 2:
+//    public List<TutorialRp> searchAllC2() throws SQLException {
+//        List<TutorialRp> rs = repository.getAll1();
+//        List<TutorialRp> resultList = new ArrayList<>();
+//
+//        if (rs == null) {
+//            throw new RuntimeException("ko có dl");
+//        }
+//        while(rs.next()){
+//            TutorialRp arr = new TutorialRp();
+//            arr.setId(BigDecimal.valueOf(rs.getLong("ID")));
+//            arr.setDescription(rs.getString("DESCRIPTION"));
+//            arr.setTitle(rs.getString("TITLE"));
+//            arr.setStatus(rs.getString("STATUS"));
+//            resultList.add(arr);
+//        }
+//        return resultList;
+//    }
 
 
     public TutorialRp searchById(Long id) throws SQLException {
-        ResultSet rs = repository.getById(id);
-        if (rs == null) {
-            throw new RuntimeException("ko có dl");
-        }
-       TutorialRp record = new TutorialRp();
-        while(rs.next()){
-            record.setId(rs.getLong("ID"));
-            record.setDescription(rs.getString("DESCRIPTION"));
-            record.setTitle(rs.getString("TITLE"));
-            record.setStatus(rs.getString("STATUS"));
-        }
-        return record;
+        TutorialRp rs = repository.getById(id);
+        return rs;
     }
 
     public List<TutorialRp> searchByTitle(TutorialRp tutorialRp) throws SQLException {
-        ResultSet rs = repository.searchByTitle(tutorialRp);
-        if (rs == null) {
-            throw new RuntimeException("ko có dl");
-        }
-        List<TutorialRp> records=new ArrayList<TutorialRp>();
-        while(rs.next()){
-            TutorialRp arr = new TutorialRp();
-//             arr = rs.getObject(i,TutorialRp.class);
-            arr.setId(rs.getLong("ID"));
-            arr.setDescription(rs.getString("DESCRIPTION"));
-            arr.setTitle(rs.getString("TITLE"));
-            arr.setStatus(rs.getString("STATUS"));
-            records.add(arr);
-        }
-        return records;
+        List<TutorialRp> rs = repository.searchByTitle(tutorialRp);
+        return rs;
     }
 
 
     public TutorialRp updateById(Long id, TutorialRp tutorialRp) throws SQLException {
-        ResultSet rs = repository.updateById(id,tutorialRp);
+        TutorialRp rs = repository.updateById(id,tutorialRp);
         if (rs == null) {
             throw new RuntimeException("ko có dl");
         }
-        TutorialRp record = new TutorialRp();
-        while(rs.next()){
-            record.setId(rs.getLong("ID"));
-            record.setDescription(rs.getString("DESCRIPTION"));
-            record.setTitle(rs.getString("TITLE"));
-            record.setStatus(rs.getString("STATUS"));
-        }
-        return record;
+        return rs;
     }
 
     public TutorialRp createById(TutorialRp tutorialRp) throws SQLException {
-        ResultSet rs = repository.createById(tutorialRp);
+        TutorialRp rs = repository.createById(tutorialRp);
         if (rs == null) {
             throw new RuntimeException("ko có dl");
         }
-        TutorialRp record = new TutorialRp();
-        while(rs.next()){
-            record.setId(rs.getLong("ID"));
-            record.setDescription(rs.getString("DESCRIPTION"));
-            record.setTitle(rs.getString("TITLE"));
-            record.setStatus(rs.getString("STATUS"));
-        }
-        return record;
+        return rs;
     }
 
     public void deleteById(Long id) throws SQLException {
-        ResultSet rs = repository.deleteById(id);
+        TutorialRp rs = repository.deleteById(id);
         if (rs == null) {
             throw new RuntimeException("ko có dl");
         }
@@ -116,14 +78,11 @@ public class TutorialService {
     }
 
     public void deleteAll() throws SQLException {
-        ResultSet rs = repository.deleteAll();
+        TutorialRp rs = repository.deleteAll();
         if (rs == null) {
             throw new RuntimeException("ko có dl");
         }
 
     }
-
-
-
 
 }
