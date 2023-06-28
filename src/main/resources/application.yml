@@ -1,4 +1,3 @@
-
 ### 1.CONFIG: PORT, CONTEXT PATH ###
 #server.servlet.context-path: /zuul
 server:
@@ -30,12 +29,15 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+
+
 ### 3. CONFIG: MANAGEMENT ###
 #https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2.0-M3-Release-Notes#actuator-http-trace-and-auditing-are-disabled-by-default
 #management.security.enabled=false
 #management.endpoints.web.cors.allowed-origins=https://example.com
 #management.endpoints.web.cors.allowed-methods=GET,POST
 #management.shutdown.enabled=true
+
 management:
   endpoints:
     enabledByDefault: true
@@ -83,24 +85,57 @@ zuul:
 ### 5. CONFIG: CUSTOM ###
 app:
   current-app:
-    api-key: ${API_KEY:19001000}
+    api-key: ${APP_CURRENT_APP_API_KEY:19001000}
     check-api-key-for-external-api: '#'
-    app-code: TEMPLATE
-    app-name: TEMPLATE (TEMPLATE)
-  guava-cache:
-    expire-after-write-minutes-category-common: 2
-    maximum-size-category-common: 5000
-    menu-back-end-by-jwt-expire-after-write-minutes: 60
-    menu-back-end-by-jwt-maximum-size: 5000
-  paging:
-    default-page-number: 0
-    default-page-size: 20
-    max-page-size: 100
+    app-code: ${APP_CURRENT_APP_APP_CODE:EVISA}
+    app-name: Evisa
   restapi:
-    api-url-auth: ${ETC_CUSTOMS_AUTH_WEBAPI_API_URL:http://10.0.222.58/gateway/cate/api/auth}
-    api-key-auth: ${ETC_CUSTOMS_AUTH_WEBAPI_API_KEY:19001000}
+    api-url-auth: ${APP_RESTAPI_API_URL_AUTH:http://10.0.223.64/evisa/develop/iam/cate/api/auth}
+    api-key-auth: ${APP_RESTAPI_API_KEY_AUTH:19001000}
     close-idle-connections-in-ms: 180000
-    connect-timeout-in-ms: 60000
+    connect-timeout-in-ms: ${RESTTEMPLATE_CONNECT_TIMEOUT:6000}
+    read-timeout-in-ms: ${RESTTEMPLATE_READ_TIMEOUT:6000}
     connection-manager-shutdown-in-ms: 300000
     max-connection: 1000
     max-per-route: 100
+    template-api: ${TEMPLATE_API:http://10.0.223.64/evisa/develop/template/api/v1/template/docx/render}
+    iam-api: ${IAM_API:http://10.0.223.64/evisa/develop/iam/cate/v1}
+    dmdc:
+      url: ${DMDC_API_URL:http://10.0.223.64/evisa/develop/dmdc/api/v1}
+      headers:
+        token: ${API_HEADER_TOKEN:eyJhbGciOiJIUzUxMiJ9.ZXlKNmFYQWlPaUpFUlVZaUxDSmhiR2NpT2lKa2FYSWlMQ0psYm1NaU9pSkJNVEk0UTBKRExVaFRNalUySW4wLi5iS2poUldQaHF3SXo0QVJWQXRhbjBBLlVjQkRsN3FnMEJzZWtlWVVIZjNFQVFUSlM3Vmo0cTluNnI4SUs3UVdmNGNmRDZ4VWprVXlIY0tkcFhiNWFZQXA3eDFGU3AxUDNqRVk3WWt0ZUpZSGNra1h5TXZVUnE2RC1jYkpRRjBnVUEwM0RuSS16cmxVSGNIMHZsczZhMVdDRkFOeU9EMEluMC0yN1RZVDZRWl9YU0tESDQzcFVrSElhNkVFbk80dDhqZV93SzFkZGlHVWp3d3dUSDlaQklOYUp6eFlIWlNYbUFxZUZ6MGZhUEdFVmdjUEZ1cUNWSTQ2a2lzYXRKN3NFVWcubDE2Qk1JTlhDMktETlozSkpzXzgtZw==.L8OVDCdahrgyHwpQJTVcUTkb3waTrVQDy7kStzS1z99dNSQ6DCcoJeHREZQcVnthAp14M3TUrLXSd8P_JpCh_A}
+#  security:
+#    enable-bypass-permissions: ${APP_SECURITY_ENABLE_BYPASS_PERMISSIONS:true}
+
+
+
+config:
+  digital-signature:
+    is-verify: ${IS_VERIFY_DIGITAL_SIGNATURE:true}
+    text-sign: ${TEXT_DS_SIGN:VITRIDATCHUKYSO}
+  document:
+    input-type: ${DOCUMENT_TYPE:json}
+    folder:
+      input-path: ${DOCUMENT_INPUT_PATH:/data/input}
+      input-image-path: ${DOCUMENT_INPUT_IMAGE_PATH:/data/image}
+      imported-path: ${DOCUMENT_IMPORTED_PATH:/data/imported}
+      output-path: ${DOCUMENT_OUTPUT_PATH:/data/output}
+  storage:
+    #    bucket:
+    #      evisa-bucket: ${STORAGE_BUCKET:hhh}
+    #      evisa-image-path: ${STORAGE_IMAGE_PATH:auto}
+    #      evisa-ho-so-chap-thuan: ${STORAGE_HO_SO_CHAP_THUAN:ky-so/chap-thuan}
+    #      evisa-ho-so-tu-choi: ${STORAGE_HO_SO_TU_CHOI:ky-so/tu-choi}
+    #      evisa-ky-so-huy: ${STORAGE_HO_SO_HUY:ky-so/huy-thi-thuc}
+    #      evisa-signing-path: ${STORAGE_SIGNING_PATH:sign/}
+    #    access:
+    #      key: ${STORAGE_ACCESS_KEY:hhh@12345}
+    #      #      Pass: Etc@1234
+    #      secret: ${STORAGE_ACCESS_SECRET:hhh@12345}
+    #    url: ${STORAGE_URL:https://127.0.0.1:9000}
+    url: http://10.0.222.153:9000
+    accessKey: xlvp-api
+    secretKey: GIVJ0nE2gCenOwXWyfJwSpd0NjaP5V79
+    buckets:
+        public: xlvp-public
+        private: xlvp
