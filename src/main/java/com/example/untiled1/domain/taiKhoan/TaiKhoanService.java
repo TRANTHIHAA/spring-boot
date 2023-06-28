@@ -1,15 +1,11 @@
-package com.example.untiled1.service;
+package com.example.untiled1.domain.taiKhoan;
 
-import com.example.untiled1.repository.impl.TaiKhoanRepository;
-import com.example.untiled1.response.TaiKhoanRp;
-import com.example.untiled1.response.TutorialRp;
+import com.example.untiled1.domain.taiKhoan.response.TaiKhoanRp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -42,9 +38,8 @@ public class TaiKhoanService {
         return record;
     }
 
-    public TaiKhoanRp deleteById(Long id) throws SQLException {
-        TaiKhoanRp rs = repository.deleteById(id);
-        return rs;
+    public void deleteById(Long id) throws SQLException {
+         repository.deleteById(id);
     }
 
 }

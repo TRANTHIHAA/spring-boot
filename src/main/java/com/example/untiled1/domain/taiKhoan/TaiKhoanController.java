@@ -1,12 +1,10 @@
-package com.example.untiled1.webapi;
+package com.example.untiled1.domain.taiKhoan;
 
-import com.example.untiled1.response.PhongBanRp;
-import com.example.untiled1.response.TaiKhoanRp;
-import com.example.untiled1.response.TutorialRp;
-import com.example.untiled1.service.PhongBanService;
-import com.example.untiled1.service.TaiKhoanService;
-import com.example.untiled1.service.TutorialService;
+import com.example.untiled1.domain.phongBan.response.PhongBanRp;
+import com.example.untiled1.domain.taiKhoan.response.TaiKhoanRp;
+import com.example.untiled1.domain.phongBan.PhongBanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,8 +48,9 @@ public class TaiKhoanController {
     }
 
     @DeleteMapping("/users/{id}/delete")
-    public ResponseEntity<TaiKhoanRp> deleteUserById( @PathVariable Long id) throws SQLException {
-        return ResponseEntity.ok(taiKhoanService.deleteById(id));
+    public ResponseEntity<?> deleteUserById( @PathVariable Long id) throws SQLException {
+        taiKhoanService.deleteById(id);
+        return ResponseEntity.ok(HttpEntity.EMPTY);
     }
 
 }

@@ -1,30 +1,12 @@
-package com.example.untiled1.repository.impl;
+package com.example.untiled1.domain.taiKhoan;
 
-import com.example.untiled1.request.TutorialRq;
-import com.example.untiled1.response.TaiKhoanRp;
-import com.example.untiled1.response.TutorialRp;
-import com.example.untiled1.service.BaseRepositoryImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.untiled1.domain.taiKhoan.response.TaiKhoanRp;
+import com.example.untiled1.global.base.BaseRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.OracleConnection;
-import oracle.jdbc.pool.OracleDataSource;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.CallableStatementCreator;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.io.IOException;
-import java.sql.*;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 @Slf4j
@@ -50,15 +32,15 @@ public class TaiKhoanRepository extends BaseRepositoryImpl<TaiKhoanRp> {
         ).get(0);
     }
 
-    public TaiKhoanRp deleteById(Long id) {
-        return excuteResultSetUsingSp(
+    public void deleteById(Long id) {
+         excuteResultSetUsingSp(
                 TaiKhoanRp.class,
                 true,
                 1,
                 "aaa_tai_khoan.user_delete"
                 , id
                 ,null
-        ).get(0);
+        );
     }
 
     public TaiKhoanRp updateById(Long id, TaiKhoanRp taiKhoanRp) {

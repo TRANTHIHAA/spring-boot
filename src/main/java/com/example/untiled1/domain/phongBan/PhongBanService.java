@@ -1,16 +1,13 @@
-package com.example.untiled1.service;
+package com.example.untiled1.domain.phongBan;
 
 
-import com.example.untiled1.repository.impl.PhongBanRepository;
-import com.example.untiled1.response.PhongBanRp;
-import com.example.untiled1.response.TutorialRp;
+import com.example.untiled1.domain.phongBan.PhongBanRepository;
+import com.example.untiled1.domain.phongBan.response.PhongBanRp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j

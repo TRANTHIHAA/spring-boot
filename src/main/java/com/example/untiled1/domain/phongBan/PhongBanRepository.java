@@ -1,7 +1,7 @@
-package com.example.untiled1.repository.impl;
+package com.example.untiled1.domain.phongBan;
 
-import com.example.untiled1.response.PhongBanRp;
-import com.example.untiled1.service.BaseRepositoryImpl;
+import com.example.untiled1.domain.phongBan.response.PhongBanRp;
+import com.example.untiled1.global.base.BaseRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package com.example.untiled1.response;
+package com.example.untiled1.domain.phongBan.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,15 +8,10 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class TaiKhoanRp {
+public class PhongBanRp {
     private BigDecimal id;
-    private BigDecimal tinhTrang;
-    private String tenTaiKhoan;
-    private String hoTen;
-    private String email;
-    private BigDecimal phongBan;
+    private BigDecimal trangThai;
     private String tenPhongBan;
-    private String matKhau;
     private Date ngayTao;
     private String nguoiTao;
     private Date ngaySua;

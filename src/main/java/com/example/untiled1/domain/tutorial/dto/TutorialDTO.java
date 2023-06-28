@@ -1,4 +1,4 @@
-package com.example.untiled1.dto;
+package com.example.untiled1.domain.tutorial.dto;
 
 public class TutorialDTO {
     private Long id;

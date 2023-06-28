@@ -1,10 +1,6 @@
-package com.example.untiled1.webapi;
+package com.example.untiled1.domain.tutorial;
 
-import com.example.untiled1.response.PhongBanRp;
-import com.example.untiled1.response.TaiKhoanRp;
-import com.example.untiled1.response.TutorialRp;
-import com.example.untiled1.service.PhongBanService;
-import com.example.untiled1.service.TutorialService;
+import com.example.untiled1.domain.tutorial.response.TutorialRp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

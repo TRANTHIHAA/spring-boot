@@ -1,30 +1,15 @@
-package com.example.untiled1.repository.impl;
+package com.example.untiled1.domain.tutorial;
 
-import com.example.untiled1.request.TutorialRq;
-import com.example.untiled1.response.TutorialRp;
-import com.example.untiled1.service.BaseRepositoryImpl;
+import com.example.untiled1.domain.tutorial.response.TutorialRp;
+import com.example.untiled1.global.base.BaseRepositoryImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.pool.OracleDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.CallableStatementCreator;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.SqlParameter;
-import org.apache.commons.lang3.StringUtils;
 
-import oracle.jdbc.OracleConnection;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
-import javax.persistence.EntityManager;
 import java.io.IOException;
-import java.sql.*;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 
 @Repository
@@ -182,25 +167,25 @@ public class TutorialDTORepository extends BaseRepositoryImpl<TutorialRp> {
         ).get(0);
     }
 
-    public TutorialRp deleteById(Long id) {
-        return super.excuteResultSetUsingSp(
+    public void deleteById(Long id) {
+        super.excuteResultSetUsingSp(
                 TutorialRp.class,
                 true,
                 1,
                 "AAA.tutorials_delete"
                 , id
                 ,null
-        ).get(0);
+        );
     }
 
-    public TutorialRp deleteAll() {
-        return super.excuteResultSetUsingSp(
+    public void deleteAll() {
+         super.excuteResultSetUsingSp(
                 TutorialRp.class,
                 true,
                 1,
                 "AAA.tutorials_delete_all"
                 ,(Object) null
-        ).get(0);
+        );
     }
 
 

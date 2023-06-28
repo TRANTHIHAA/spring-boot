@@ -1,4 +1,4 @@
-package com.example.untiled1.response;
+package com.example.untiled1.domain.tutorial.response;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,8 +1,7 @@
-package com.example.untiled1.service;
+package com.example.untiled1.domain.tutorial;
 
 
-import com.example.untiled1.repository.impl.TutorialDTORepository;
-import com.example.untiled1.response.TutorialRp;
+import com.example.untiled1.domain.tutorial.response.TutorialRp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,18 +69,11 @@ public class TutorialService {
     }
 
     public void deleteById(Long id) throws SQLException {
-        TutorialRp rs = repository.deleteById(id);
-        if (rs == null) {
-            throw new RuntimeException("ko có dl");
-        }
-
+         repository.deleteById(id);
     }
 
     public void deleteAll() throws SQLException {
-        TutorialRp rs = repository.deleteAll();
-        if (rs == null) {
-            throw new RuntimeException("ko có dl");
-        }
+         repository.deleteAll();
 
     }
 

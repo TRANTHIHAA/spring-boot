@@ -1,5 +1,7 @@
-package com.example.untiled1.service;
+package com.example.untiled1.global.base;
 
+import jakarta.persistence.*;
+import jakarta.persistence.PersistenceContext;
 import oracle.jdbc.OracleConnection;
 import oracle.jdbc.pool.OracleDataSource;
 import org.apache.commons.lang3.StringUtils;
@@ -7,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
@@ -150,7 +150,9 @@ public class BaseRepositoryImpl<T> {
             }
 
 //            return rs;
+
             return mapResultSetToListObject(rs, clazz);
+
         } catch (Exception var13) {
             throw new RuntimeException(var13.getMessage());
         }
