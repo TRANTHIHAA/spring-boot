@@ -43,6 +43,7 @@ public class TaiKhoanRepository extends BaseRepositoryImpl<TaiKhoanRp> {
         );
     }
 
+
     public TaiKhoanRp updateById(Long id, TaiKhoanRp taiKhoanRp) {
         return excuteResultSetUsingSp(
                 TaiKhoanRp.class,
