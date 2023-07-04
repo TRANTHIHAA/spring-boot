@@ -71,13 +71,10 @@ public class BaseRepositoryImpl<T> {
     }
 
     /* Calling Stored Procedure using JdbcTemplate */
-    public List<T> excuteResultSetUsingSp(
-            Class<T> clazz,
-            boolean isDbOracle,
-            int type,
-            String procedureName,
-            Object... params) {
-
+    public ResultSet excuteResultSet( boolean isDbOracle,
+                                      int type,
+                                      String procedureName,
+                                      Object... params) {
         OracleConnection cnn = null;
         try {
             OracleDataSource odcDataSource = new OracleDataSource();
@@ -149,16 +146,31 @@ public class BaseRepositoryImpl<T> {
                 ++i;
             }
 
-//            return rs;
-
-            return mapResultSetToListObject(rs, clazz);
-
+            return rs;
         } catch (Exception var13) {
             throw new RuntimeException(var13.getMessage());
         }
 
 
     }
+
+
+    public List<T> excuteResultSetUsingSp(
+            Class<T> clazz,
+            boolean isDbOracle,
+            int type,
+            String procedureName,
+            Object... params)  {
+
+        try {
+            ResultSet rs = excuteResultSet(isDbOracle,type,procedureName,params);
+            return mapResultSetToListObject(rs, clazz);
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
 
     public static Timestamp convertUtilDate2SqlTimestamp(java.util.Date tInput) {
         Calendar cal = Calendar.getInstance();

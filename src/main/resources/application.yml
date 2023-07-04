@@ -9,12 +9,12 @@ spring:
   application:
     name: ${APP_NAME:TEMPLATE-API}
   datasource:
-#    url: jdbc:oracle:thin:@${DB_DATASOURCE:10.0.222.29:1521/ccs4db}
-#    username: ${DB_USERNAME:DEMO}
-#    password: ${DB_PASSWORD:123456}
-    url: ${SPRING_DATASOURCE_URL:jdbc:oracle:thin:@//10.0.223.163:1521/bcadb}
-    username: ${SPRING_DATASOURCE_USERNAME:C08_DKX_OTO}
-    password: ${SPRING_DATASOURCE_PASSWORD:Etcadmin1}
+    url: jdbc:oracle:thin:@${DB_DATASOURCE:10.0.222.29:1521/ccs4db}
+    username: ${DB_USERNAME:DEMO}
+    password: ${DB_PASSWORD:123456}
+#    url: ${SPRING_DATASOURCE_URL:jdbc:oracle:thin:@//10.0.223.163:1521/bcadb}
+#    username: ${SPRING_DATASOURCE_USERNAME:C08_DKX_OTO}
+#    password: ${SPRING_DATASOURCE_PASSWORD:Etcadmin1}
     driver-class-name: oracle.jdbc.OracleDriver
   mvc:
     pathmatch:

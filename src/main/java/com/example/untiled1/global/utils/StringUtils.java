@@ -2,10 +2,15 @@ package com.example.untiled1.global.utils;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.errors.ResourceNotFoundException;
 
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
-
-import static com.example.untiled1.global.utils.FileUtils.TAIL_XLSX;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Slf4j
 public class StringUtils {
@@ -19,6 +24,13 @@ public class StringUtils {
     public static final String TAIL_JSON = ".json";
     public static final String COMMA = ",";
     public static final String DD_MM_YYYY = "dd/MM/yyyy";
+    public static final String DOT = ".";
+    public static final String ONE_SPACE = " ";
+    public static final String ACTIVE = "Kích hoạt";
+    public static final String INACTIVE = "Không kích hoạt";
+    public static final String TAIL_XLSX = ".xlsx";
+
+    public static final String TAB_AFTER_TEXT = "</w:t><w:tab/><w:t>";
 
     public static boolean isNullOrBlank(String text) {
         return text == null || text.trim().isBlank();
@@ -36,9 +48,21 @@ public class StringUtils {
         return object.toString();
     }
 
-    public static String appendIfMissing(Object object) {
-        return appendIfMissing(object, "0", 2);
+    public static String appendIfMissing(Object object, int total) {
+        if (object == null || object.toString() == null) {
+            return EMPTY;
+        }
+        StringBuilder addZero = new StringBuilder();
+        if (object.toString().length() <= total) {
+            addZero.append("0".repeat(Math.max(0, total - object.toString().length()))).append(object);
+            return addZero.toString();
+        }
+        return object.toString();
     }
+
+//    public static String appendIfMissing1(Object object) {
+//        return appendIfMissing(object, "0", 2);
+//    }
 
     public static String ifNullToEmpty(Object text) {
         return text == null ? EMPTY : text.toString();
@@ -57,6 +81,117 @@ public class StringUtils {
     }
 
     public static String toFileName(String name, String... tail) {
-        return name.concat(tail.length > 0 ? tail[0] : TAIL_XLSX);
+        return name.concat(tail.length > 0 ? tail[0] : FileUtils.TAIL_XLSX);
     }
+
+    public static String trimObject(Object e) {
+        if (e != null) {
+            return e.toString().trim();
+        }
+        return null;
+    }
+
+    public static String formatDateTime(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
+    }
+
+    public static String formatDate(Date date) {
+        return new SimpleDateFormat("dd-MM-yyyy").format(date);
+    }
+
+    public static String formatDate2(Date date) {
+        return new SimpleDateFormat("dd/MM/yyyy").format(date);
+    }
+
+    public static String formatDate3(Date date) {
+        return new SimpleDateFormat("ddMMyyyy").format(date);
+    }
+
+    public static String formatTime2FileName(Date date) {
+        return new SimpleDateFormat("dd_MM_yyyy").format(date);
+    }
+
+    public static String formatDate2FileName(Date date) {
+        return new SimpleDateFormat("HH_mm_ss_SSSS").format(date);
+    }
+
+    public static String appendIfMissing(Object object) {
+        return appendIfMissing(object, 2);
+    }
+
+    public static Object getColumnNotNullAndValueOf(Object o) {
+        if (o == null || String.valueOf(o).length() < 1) {
+            throw new NullPointerException();
+        }
+        return o;
+    }
+
+    public static boolean checkColumnNotNull(Object o) {
+        return o == null || String.valueOf(o).length() < 1;
+    }
+
+    public static String concat3String(String ma1, String ma2, String ma3) {
+        return String.format("%s%s%s", ma1, ma2, ma3);
+    }
+
+    public static <T> void assertValidObjects(List<T> objectList, String message) {
+        if (objectList.isEmpty()) {
+            throw new ResourceNotFoundException(message);
+        }
+    }
+
+
+    public static <T> void assertValidObjectsIsNotNull(T object, String message) {
+        if (object == null) {
+            throw new ResourceNotFoundException(message);
+        }
+    }
+
+    public static String removeAccent(String text) {
+        String temp = Normalizer.normalize(text, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        temp = pattern.matcher(temp).replaceAll("");
+        temp = temp.replace("đ", "d");
+        temp = temp.replace("Đ", "D");
+        return temp;
+    }
+
+    public static boolean isExistedInArray(Object object, Object[] array) {
+        for (Object obj : array) {
+            if (Objects.equals(object, obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String toString(Object object, String dot) {
+        if (dot == null) {
+            return toString(object);
+        }
+        if (object == null) {
+            return dot;
+        }
+        if (object instanceof Date) {
+            return formatDate((Date) object);
+        }
+        return String.valueOf(object);
+    }
+    public static String toString(Object object) {
+        if (object == null) {
+            return EMPTY;
+        }
+        if (object instanceof Date) {
+            return formatDate((Date) object);
+        }
+        return String.valueOf(object);
+    }
+
+    public static String getFileName(String type, String code) {
+        return type.concat("-").concat(code).concat(".pdf");
+    }
+
 }
