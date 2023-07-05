@@ -69,10 +69,10 @@ public class ReportService
 
         // B4: Build tham so bao cao jasper report
         Map<String, Object> mapReportParam;
-        if (reportInfo.getStrJasperParam() == null || reportInfo.getStrJasperParam().isEmpty()) {
+        if (reportInfo.getJasperParam() == null || reportInfo.getJasperParam().isEmpty()) {
             mapReportParam = null;
         } else {
-            mapReportParam = buildParameterForReport(reportInfo.getStrJasperParam());
+            mapReportParam = buildParameterForReport(reportInfo.getJasperParam());
         }
 
         // B5: Tạo file báo cáo
