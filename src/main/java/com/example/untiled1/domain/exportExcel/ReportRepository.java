@@ -33,6 +33,20 @@ public class ReportRepository extends BaseRepositoryImpl<ReportRequestInfo> {
         ).get(0);
     }
 
+    public ReportRequestInfo saveReportRequestTest(KeySearchListObj objInput, String strToken) {
+        return excuteResultSetUsingSp( //
+                ReportRequestInfo.class //
+                ,true
+                ,1
+                , "PKG_REPORT.SP_SAVE_REPORT_REQUEST" //
+                , objInput.getReportCode()
+                , objInput.getFileType()
+                , ReportUtil.convertObject2Json(objInput)
+                , strToken
+                ,null
+        ).get(0);
+    }
+
     public ResultSet getReportData(String reportId) {
         return  excuteResultSet(
                 true

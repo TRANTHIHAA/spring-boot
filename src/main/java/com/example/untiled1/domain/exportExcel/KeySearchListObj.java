@@ -40,4 +40,6 @@ public class KeySearchListObj  implements Serializable {
 
     // 3. Đến ngày (thời gian lập báo cáo đến)
     private String denNgay;
+
+    private String tenFileDinhKem;
 }
