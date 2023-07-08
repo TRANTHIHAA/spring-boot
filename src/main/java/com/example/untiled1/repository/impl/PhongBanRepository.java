@@ -82,7 +82,7 @@ public class PhongBanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.search_all_phong_ban"
+                "pkg_tai_khoan.search_all_phong_ban"
                 , (Object) null
         );
     }
@@ -91,7 +91,7 @@ public class PhongBanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.search_all_phong_ban"
+                "pkg_tai_khoan.search_all_phong_ban"
                 ,tutorialRp.getTitle()
                 ,(Object) null
         );

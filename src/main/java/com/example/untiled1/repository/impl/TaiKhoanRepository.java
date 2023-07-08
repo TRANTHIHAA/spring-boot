@@ -49,7 +49,7 @@ public class TaiKhoanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.create_user"
+                "pkg_tai_khoan.create_user"
                 ,taiKhoanRp.getTenTaiKhoan()
                 ,taiKhoanRp.getEmail()
                 ,taiKhoanRp.getHoTen()
@@ -66,7 +66,7 @@ public class TaiKhoanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.user_delete"
+                "pkg_tai_khoan.user_delete"
                 , id
                 ,null
         );
@@ -76,7 +76,7 @@ public class TaiKhoanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.user_update"
+                "pkg_tai_khoan.user_update"
                 , id
                 ,taiKhoanRp.getTenTaiKhoan()
                 ,taiKhoanRp.getTinhTrang()
@@ -93,7 +93,7 @@ public class TaiKhoanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.find_user_by_id"
+                "pkg_tai_khoan.find_user_by_id"
                 , id
                 ,null
         );
@@ -103,7 +103,7 @@ public class TaiKhoanRepository {
         return (ResultSet) excuteResultSetUsingSp(
                 true,
                 1,
-                "aaa_tai_khoan.search_all_tai_khoan"
+                "pkg_tai_khoan.search_all_tai_khoan"
                 , (Object) null
         );
     }
