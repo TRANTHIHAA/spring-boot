@@ -2,6 +2,8 @@ package com.example.untiled1.domain.tutorial;
 
 
 import com.example.untiled1.domain.tutorial.response.TutorialRp;
+import com.example.untiled1.test.test2.ValidatorService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.List;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TutorialService {
 
     @Autowired
     TutorialDTORepository repository;
+    private final ValidatorService validatorService ;
 
     public List<TutorialRp> searchAll() throws SQLException {
         return repository.getAll1();
@@ -43,7 +47,12 @@ public class TutorialService {
 
     public TutorialRp searchById(Long id) throws SQLException {
         TutorialRp rs = repository.getById(id);
-        return rs;
+        // check validate trước khi trả về rs, đang sd validate động
+        if (this.validatorService.validate(rs)) {
+            return rs;
+        }
+        return null;
+
     }
 
     public List<TutorialRp> searchByTitle(TutorialRp tutorialRp) throws SQLException {

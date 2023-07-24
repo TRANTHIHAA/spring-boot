@@ -1,11 +1,12 @@
 package com.example.untiled1.global.utils;
 
+import com.sun.jdi.InternalException;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.InputStreamSource;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -14,7 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Slf4j
 public class FileUtils {
@@ -153,5 +157,28 @@ public class FileUtils {
             return false;
         }
         return true;
+    }
+
+    public static InputStreamResource toZip(Map<String, InputStreamSource> inputStreamSources) {
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            ZipOutputStream zos = new ZipOutputStream(os);
+            for (Map.Entry<String, InputStreamSource> inputStreamSource : inputStreamSources.entrySet()) {
+                try (InputStream inputStream = inputStreamSource.getValue().getInputStream()) {
+                    zos.putNextEntry(new ZipEntry(StringUtils.toFileName(inputStreamSource.getKey(), StringUtils.TAIL_PDF)));
+                    int length;
+                    while ((length = inputStream.read(buffer)) > 0) {
+                        zos.write(buffer, 0, length);
+                    }
+                    zos.closeEntry();
+                }
+            }
+            zos.close();
+            return new InputStreamResource(new ByteArrayInputStream(os.toByteArray()));
+        } catch (Exception ex) {
+            log.error("Compress the file failed !!!");
+            log.error(ex.getMessage());
+            throw new InternalException(ex.getMessage());
+        }
     }
 }

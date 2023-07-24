@@ -29,7 +29,16 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  flyway:
+    baseline-on-migrate: true
+    enabled: ${SPRING_FLYWAY_ENABLED:false}
+    out-of-order: ${SPRING_FLYWAY_OUT_OF_ORDER:false}
+    locations: "classpath:db/migration"
 
+#flyway:
+#  validate-on-migrate: false
+#  encoding: UTF8MB4
+#  out-of-order: true
 
 ### 3. CONFIG: MANAGEMENT ###
 #https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2.0-M3-Release-Notes#actuator-http-trace-and-auditing-are-disabled-by-default

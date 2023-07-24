@@ -32,7 +32,10 @@
 <!--			<artifactId>opencv</artifactId>-->
 <!--			<version>3.2.0-1</version>-->
 <!--		</dependency>-->
-
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacv-platform</artifactId>
