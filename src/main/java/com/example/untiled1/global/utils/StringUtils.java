@@ -1,15 +1,15 @@
 package com.example.untiled1.global.utils;
 
+import com.example.untiled1.domain.auth.dto.LoginResponseDto;
+
+import com.google.gson.Gson;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -192,6 +192,21 @@ public class StringUtils {
 
     public static String getFileName(String type, String code) {
         return type.concat("-").concat(code).concat(".pdf");
+    }
+
+    public static Long getExpFromToken(String token) {
+        if (token == null) {
+            return 0L;
+        }
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        LoginResponseDto loginResponse = new Gson().fromJson(payload, LoginResponseDto.class);
+        if (loginResponse == null) {
+            return 0L;
+        }
+        return loginResponse.getExp();
     }
 
 }

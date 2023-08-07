@@ -1,0 +1,44 @@
+javax:
+  validation:
+    constraints:
+      NotEmpty:
+        message: "trường bắt buộc"
+    email:
+      message: "Email không hợp lệ"
+    special:
+      message: "Không được chứa kí tự đặc biệt"
+
+
+pattern:
+  chi_duoc_nhap_so: "chỉ được nhập số từ 1 đến 5"
+  chi_duoc_nhap_ki_tu: "không được nhập số hoặc kí tự đặc biệt"
+  dia_danh_hanh_chinh_id: "mã này chỉ được nhập số không được quá 50 chữ số"
+  ma_cap_1_va_2: "mã này chỉ được nhập số không được quá 2 chữ số"
+  ma_cap_3_va_4: "mã này chỉ được nhập số không được quá 3 chữ số"
+  so_dien_thoai: "số điện thoại chỉ được nhập số có 10 chữ số"
+  ma_tinh_thanh: "mã tỉnh thành phải có 2 chữ số"
+  ma_quan_huyen: "mã quận huyện phải có 3 chữ số"
+  ma_phuong_xa: "mã phường xã phải có 5 chữ số"
+  ten_tinh_thanh: "tên tỉnh thành không được quá 50 ký tự"
+  ten_quan_huyen: "tên quận huyện hông được quá 50 ký tự"
+  ten_phuong_xa: "tên phường xã hông được quá 50 ký tự"
+  ten_hieu: "tên hiệu không được quá 50 ký tự"
+  ten_en: "tên tiếng Anh không được quá 50 ký tự"
+  tien_to_dia_danh: "tiền tố không được quá 20 ký tự"
+  cap_hanh_chinh: "cấp hành chính không được quá 50 ký tự"
+  ma_kho_bac: "mã kho bạc phải có 4 chữ số"
+  ma_8_so: "mã 8 số kho bạc phải có 8 chữ số"
+  ma_chi_nhanh: "mã chi nhánh phải có từ 8 đến 10 chữ số"
+  so_tai_khoan: "số tài khoản phải có từ 8 đến 20 chữ số"
+  ma_cap_10_va_15: "chỉ được nhập số từ 10 đến 15"
+  ma_nhan_hieu: "Mã nhãn hiệu không đúng định dạng"
+
+default:
+  tutorial:
+    header: "Mã, Mô Tả, Tiêu Đề, Trạng thái"
+    sheetname: "Tutorial"
+    filename: "Tutorial"
+  quocgia:
+    header: "Mã quốc gia, Tên tiếng Việt, Tên tiếng Anh, Tên đầy đủ, Trạng thái, Ghi chú, Lần cập nhật cuối, Người cập nhật cuối"
+    sheetname: "Danh sách thông tin quốc gia"
+    filename: "danh_sach_thong_tin_quoc_gia"

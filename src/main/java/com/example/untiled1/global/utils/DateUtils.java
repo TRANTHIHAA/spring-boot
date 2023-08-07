@@ -26,6 +26,12 @@ public class DateUtils {
     public static final Long WEEK = 7L;
     public static final Long YEAR = 365L;
 
+    public static String dateToString(Date date, String... format) {
+        if (date == null) {
+            return null;
+        }
+        return new SimpleDateFormat(format.length > 0 ? format[0] : YYYY_MM_DD_HH_MM_SS).format(date);
+    }
     public static String toString(Date date, String... format) {
         if (date == null) {
             return null;
