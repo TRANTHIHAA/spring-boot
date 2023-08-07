@@ -1,5 +1,9 @@
 package com.example.untiled1.global.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.google.gson.Gson;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,11 +12,15 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 @Slf4j
 public class JsonUtils {
     private static Gson gSonMapper;
+
+    private static ObjectMapper mObjectMapper;
+
     private JsonUtils() {
         throw new UnsupportedOperationException();
     }
@@ -71,5 +79,26 @@ public class JsonUtils {
             gSonMapper = new Gson();
         }
         return gSonMapper;
+    }
+
+    public static <T> T entity(String json, Class<T> tClass) throws IOException {
+        return getMapper().readValue(json, tClass);
+    }
+
+    private static ObjectMapper getMapper() {
+        if (mObjectMapper == null) {
+            mObjectMapper = new ObjectMapper();
+        }
+        return mObjectMapper;
+    }
+
+    public static <T> List<T> arrayList(String json, Class<T> tClass) {
+        try {
+            TypeFactory typeFactory = getMapper().getTypeFactory();
+            JavaType type = typeFactory.constructCollectionType(ArrayList.class, tClass);
+            return getMapper().readValue(json, type);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.untiled1.domain.taiKhoan;
 
 import com.example.untiled1.domain.taiKhoan.response.TaiKhoanRp;
 import com.example.untiled1.global.base.BaseRepositoryImpl;
+import com.example.untiled1.global.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,7 @@ public class TaiKhoanRepository extends BaseRepositoryImpl<TaiKhoanRp> {
                 ,taiKhoanRp.getNguoiSua()
                 ,taiKhoanRp.getPhongBan()
                 ,taiKhoanRp.getTinhTrang()
+                ,JsonUtils.toJson(taiKhoanRp)
                 ,null
         ).get(0);
     }
