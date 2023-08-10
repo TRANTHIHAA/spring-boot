@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 
 import javax.persistence.EntityManager;
-
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.jpa.HibernateEntityManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonNode;
