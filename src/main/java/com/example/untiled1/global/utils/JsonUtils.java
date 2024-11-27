@@ -17,6 +17,8 @@ public class JsonUtils {
         throw new UnsupportedOperationException();
     }
 
+    // private static ObjectMapper mObjectMapper;
+
     public static <T> List<T> toClass(@NotNull File file, @NotNull Class<? extends T[]> tClass) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             return Arrays.asList(new Gson().fromJson(bufferedReader, tClass));
@@ -72,4 +74,37 @@ public class JsonUtils {
         }
         return gSonMapper;
     }
+  //   public static boolean isValid(String json) {
+  //   try {
+  //     ObjectMapper mapper = new ObjectMapper();
+  //     mapper.readTree(json);
+  //   } catch (JacksonException e) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  //     public static <T> T toClass(Object o, Class<T> tClass) {
+  //   try {
+  //     if (Objects.equals(o.getClass().getName(), tClass.getName())) {
+  //       return (T) o;
+  //     }
+  //     String tempJson;
+  //     if (o instanceof String) {
+  //       tempJson = o.toString();
+  //     } else {
+  //       tempJson = toJson(o);
+  //     }
+  //     return getGSonMapper().fromJson(tempJson, tClass);
+  //   } catch (Exception e) {
+  //     throw new InternalServerErrorException(e.getMessage());
+  //   }
+  // }
+
+  //     private static Gson getGSonMapper() {
+  //   if (gSonMapper == null) {
+  //     gSonMapper = new Gson();
+  //   }
+  //   return gSonMapper;
+  // }
 }
