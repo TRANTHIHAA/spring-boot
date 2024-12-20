@@ -29,6 +29,7 @@ public class TaiKhoanRepository extends BaseRepositoryImpl<TaiKhoanRp> {
                 ,taiKhoanRp.getPhongBan()
                 ,taiKhoanRp.getTinhTrang()
                 ,null
+                ,null
         ).get(0);
     }
 
